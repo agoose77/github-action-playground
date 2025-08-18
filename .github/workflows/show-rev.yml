@@ -6,5 +6,6 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v5
       - run: git rev-parse --abbrev-ref HEAD
       - run: git status
