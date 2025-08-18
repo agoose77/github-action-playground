@@ -31,7 +31,7 @@ jobs:
               ref = event['ref']
 
               if (match := re.match("^refs/heads/(.*)$", ref)): 
-                repo_name = pull_request['repository']['full_name']
+                repo_name = event['repository']['full_name']
                 branch_name = match[1]
                 return f"https://github.com/{repo_name}/edit/${branch_name}{file_path}"
 
