@@ -13,6 +13,7 @@ jobs:
       - run: |
           import os
           import json
+          import re
 
           event_path = os.environ['GITHUB_EVENT_PATH']
           with open(event_path, "r") as f:
@@ -26,6 +27,14 @@ jobs:
 
               # If we're a fork, pr_repo_name won't match the source repo
               return f"https://github.com/{pr_repo_name}/edit/${pr_branch_name}{file_path}"
+            elif "commits" in event:
+              ref = event['ref']
+
+              if (match := re.match("^refs/heads/(.*)$", ref)): 
+                repo_name = pull_request['repository']['full_name']
+                branch_name = match[1]
+                return f"https://github.com/{repo_name}/edit/${branch_name}{file_path}"
+
           print(get_edit_url())
 
 
