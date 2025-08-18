@@ -1,1 +1,0 @@
-#define HEADER_VAR "I AM A HEADER"
