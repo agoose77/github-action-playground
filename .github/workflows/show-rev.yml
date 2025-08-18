@@ -8,4 +8,5 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - run: git rev-parse --abbrev-ref HEAD
+      - run: cat ${GITHUB_EVENT_PATH}
       - run: git status
