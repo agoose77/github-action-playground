@@ -1,12 +1,33 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: pull_request
+on: 
+  - pull_request
+  - push
 
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - run: git rev-parse --abbrev-ref HEAD
-      - run: cat ${GITHUB_EVENT_PATH}
-      - run: git status
+      - run: jq . ${GITHUB_EVENT_PATH}
+      - run: |
+          import os
+          import json
+
+          event_path = os.environ['GITHUB_EVENT_PATH']
+          with open(event_path, "r") as f:
+            event = json.load(f)
+          
+          file_path = "/file.md"
+          def get_edit_url():
+            if (pull_request := event.get("pull_request")):
+              pr_repo_name = pull_request['head']['repo']['full_name']
+              pr_branch_name = pull_request['head']['ref']
+
+              # If we're a fork, pr_repo_name won't match the source repo
+              return f"https://github.com/{pr_repo_name}/edit/${pr_branch_name}{file_path}"
+          print(get_edit_url())
+
+
+
+        shell: python
