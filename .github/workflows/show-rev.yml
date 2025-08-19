@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - run: jq . ${GITHUB_EVENT_PATH}
+      - run: git rev-parse --abbrev-ref HEAD
       - run: |
           import os
           import json
