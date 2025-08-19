@@ -11,6 +11,7 @@ jobs:
       - uses: actions/checkout@v5
       - run: jq . ${GITHUB_EVENT_PATH}
       - run: git rev-parse --abbrev-ref HEAD
+      - run: git log --oneline
       - run: |
           import os
           import json
