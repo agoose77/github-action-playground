@@ -7,8 +7,14 @@ import { startBinder } from "./lib.mjs";
 async function main() {
   try {
     const hubUrl = core.getInput("hub-url");
-    const githubRepo = core.getInput("repo") ?? github.repository;
     const githubRef = core.getInput("ref");
+    const githubRepo = core.getInput("repo") ?? github.repository;
+
+    if (!hubUrl || !githubRef) {
+            throw new Error()
+
+    }
+
     const spec = { githubRepo, githubRef };
     const response = await startBinder(hubUrl, spec);
 
