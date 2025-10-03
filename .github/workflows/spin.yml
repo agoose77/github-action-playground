@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+      - run: npm install
+        working-directory: ./.github/actions/clinder
       - name: Hello world action step
         id: hello
         uses: ./.github/actions/clinder

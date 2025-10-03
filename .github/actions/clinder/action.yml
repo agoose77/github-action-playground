@@ -21,4 +21,4 @@ outputs:
 runs:
   using: node20
   main: setup.mjs
-  post: teardown.js
+  post: teardown.mjs
