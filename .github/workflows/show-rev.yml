@@ -12,8 +12,7 @@ jobs:
       - run: jq . ${GITHUB_EVENT_PATH}
       - run: git rev-parse --abbrev-ref HEAD
       - run: git log --oneline
-      - run: |
-        echo "${{ github.event.pull_request.merge_commit_sha }}"
+      - run: echo ${{ github.event.pull_request.merge_commit_sha }}
       - run: |
           import os
           import json
